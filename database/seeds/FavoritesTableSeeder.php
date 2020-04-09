@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Favorite;
 
 class FavoritesTableSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class FavoritesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        for ($i = 2; $i <= 10; $i++) {
+            Favorite::create([
+                             'user_id' => 1,
+                             'tweet_id' => $i
+                             ]);
+        }
     }
 }
