@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
                     TweetsTableSeeder::class,
                     CommentsTableSeeder::class,
                     FavoritesTableSeeder::class,
-                    FollowersTableSeeder::class,
+                    //FollowersTableSeeder::class,
                     ]);
     }
 }

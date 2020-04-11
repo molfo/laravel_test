@@ -19,9 +19,9 @@ class UsersTableSeeder extends Seeder
             'profile_image' =>  'https://placehold.jp/50×50.png',
             'email'         =>  'test' .$i .'@test.com',
             'password'      =>  Hash::make('0000'),
-            'remenber_token'=>  str_random(10),
-            'create_at'     =>  now(),
-            'updated_at'    =>  now(),
+            'remember_token'=>  str_random(10),
+            'created_at'     =>  now(),
+            'updated_at'    =>  now()
                      ]);
         }
     }

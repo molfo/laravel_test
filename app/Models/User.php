@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -30,7 +29,7 @@ class User extends Authenticatable
     
     public function follows()
     {
-        return $this->belongsToMany(self:class,'followers','followed_id','following_id');
+        return $this->belongsToMany(self::class,'followers','followed_id','following_id');
     }
     /**
      * The attributes that should be hidden for arrays.
@@ -40,7 +39,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -49,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function getAllUsers(Int $user_id)
+    {
+        return $this->where('id','<>',$user_id)->paginate(5);
+    }
 }
