@@ -4,20 +4,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+            @foreach ($all_users as $user)
+                <div class="card">
+                    <div class="card-haeder p-3 w-100 d-flex">
+                        <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
+                        <div class="ml-2 d-flex flex-culumn">
+                            <p class="md-0">{{ $user->name }}</p>
+                            <a href="{{ url('user/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
                         </div>
-                    @endif
-
-                    You are logged in!
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
+    </div>
+    <div class="my-4 d-flex justify-content-center">
+        {{ $all_users->links() }}
     </div>
 </div>
 @endsection

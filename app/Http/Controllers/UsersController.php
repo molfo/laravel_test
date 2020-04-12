@@ -16,9 +16,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $User)
+    public function index(User $user)
     {
-        $all_users = $user->getAllUsers(auth()->uesr()->id);
+        $all_users = $user->getAllUsers(auth()->user()->id);
         
         return view('users.index',[
                     'all_users' => $all_users
