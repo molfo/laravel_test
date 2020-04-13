@@ -14,6 +14,6 @@ class Follower extends Model
         'following_id',
         'followed_id'
     ];
-    public $timestamps = fales;
-    public $incrementing = fales;
+    public $timestamps = false;
+    public $incrementing = false;
 }
