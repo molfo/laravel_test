@@ -24,12 +24,12 @@ class User extends Authenticatable
 
     public function followers()
     {
-        return $this->belongsToMany(self::class,'follwers','followed_id','follwing_id');
+        return $this->belongsToMany(self::class,'followers','followed_id','following_id');
     }
     
     public function follows()
     {
-        return $this->belongsToMany(self::class,'followers','followed_id','following_id');
+        return $this->belongsToMany(self::class,'followers','following_id','followed_id');
     }
     /**
      * The attributes that should be hidden for arrays.
@@ -51,5 +51,34 @@ class User extends Authenticatable
     public function getAllUsers(Int $user_id)
     {
         return $this->where('id','<>',$user_id)->paginate(5);
+    }
+    
+    // フォローする
+    public function follow(Int $user_id)
+    {
+        return $this->follows()->attach($user_id);
+    }
+    
+    // フォロー解除する
+    public function unfollow(Int $user_id)
+    {
+        return $this->follows()->detach($user_id);
+    }
+    
+    // フォローしているか
+    public function isFollowing(Int $user_id)
+    {
+        //初期コード。/User遷移時エラー(遷移時Followに必要な値が存在しない？)
+        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['id']);
+        //return $this−>follows()−>where(′followed_id′,$user_id)->exists();
+        //return $this−>follows()−>where(′followed_id′,$this−>follows()−>where(′followed_id′,user_id)->exists();
+    }
+    
+    // フォローされているか
+    public function isFollowed(Int $user_id)
+    {
+        //初期コード。/User遷移時エラー(遷移時Followに必要な値が存在しない？)
+        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
+        //return $this−>follows()−>where(′following_id′,$user_id)->exists();
     }
 }

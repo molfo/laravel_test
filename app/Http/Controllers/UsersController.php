@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
-use App\Models\Treet;
+use App\Models\Tweet;
 use App\Models\Follower;
 
 class UsersController extends Controller
@@ -52,9 +52,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user, Tweet $tweet, Follower $follower)
     {
-        //
+        $login_user = auth()->user();
+        $is_following = $login_user->isFollowing($user->id);
+        $is_followed = $login_user-?isFollowed($user->id);
+        $timelines = $tweet->getUserTimeLine($user->id);
+        $
     }
 
     /**
@@ -89,5 +93,32 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    //フォロー
+    public function follow(User $user)
+    {
+        $follower = auth()->user();
+        //フォローしているか
+        $is_following = $follower->isFollowing($user->id);
+        if(!$is_following) {
+            //フォローしていなければフォローする
+            $follower->follow($user->id);
+            return back();
+        }
+    }
+        
+    // フォロー解除
+    public function unfollow(User $user)
+    {
+        $follower = auth()->user();
+        // フォローしているか
+        $is_following = $follower->isFollowing($user->id);
+        if($is_following) {
+            // フォローしていればフォローを解除する
+            $follower->unfollow($user->id);
+            return back();
+        }
+        
     }
 }
