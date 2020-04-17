@@ -58,7 +58,19 @@ class UsersController extends Controller
         $is_following = $login_user->isFollowing($user->id);
         $is_followed = $login_user-?isFollowed($user->id);
         $timelines = $tweet->getUserTimeLine($user->id);
-        $
+        $tweet_count = $tweet–>getTweertCount($user->id);
+        $follow_count = $follower->getFollowCount($user->id);
+        $follower_count = $follower->getFollowerCount($user->id);
+        
+        return view('users.show',[
+                    'user'              => $user,
+                    'is_following'      => $is_following,
+                    'is_followed'       => $is_followed,
+                    'timelines'         => $timelines,
+                    'tweet_count'       => $tweet_count,
+                    'follow_count'      => $follow_count,
+                    'follower_count'    => $follower_count
+                    ]);
     }
 
     /**
