@@ -29,7 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
                  Route::resource('users','UsersController',['only' => ['index','show','edit','update']]);
                  
                  //フォロー/フォロー解除を追加
-//                 Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
-                 Route::put('users/{user}/follow', 'UsersController@follow')->name('follow');
+                 Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
+//                 Route::put('users/{user}/follow', 'UsersController@follow')->name('follow');
                  Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
     });

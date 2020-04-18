@@ -56,9 +56,9 @@ class UsersController extends Controller
     {
         $login_user = auth()->user();
         $is_following = $login_user->isFollowing($user->id);
-        $is_followed = $login_user-?isFollowed($user->id);
+        $is_followed = $login_user->isFollowed($user->id);
         $timelines = $tweet->getUserTimeLine($user->id);
-        $tweet_count = $tweet–>getTweertCount($user->id);
+        $tweet_count = $tweet->getTweetCount($user->id);
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
         
